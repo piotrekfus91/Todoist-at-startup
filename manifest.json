@@ -13,6 +13,18 @@
     ]
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "https://todoist.com/oauth/access_token",
+    "https://todoist.com/API/v6/sync"
+  ],
+  "content_scripts": [
+    {
+      "matches": [ "https://todoist.com/robots.txt*" ],
+      "js": [ "oauth2/oauth2_inject.js" ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
   ]
 }
