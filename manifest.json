@@ -1,0 +1,9 @@
+{
+  "name": "Todoist at startup",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Extensions which opens chosen Todoist project at Chrome statup.",
+  "browser_action": {
+    "default_icon": "icons/icon.png"
+  }
+}
