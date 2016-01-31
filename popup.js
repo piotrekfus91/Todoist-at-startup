@@ -11,6 +11,13 @@ todoistOauth.authorize(function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   fetchProjects();
+  
+  document.getElementById('save').addEventListener('click', function() {
+    var projectId = document.getElementById('projects').value;
+    
+    chrome.storage.sync.set({"project_id": projectId});
+    window.close();
+  });
 });
 
 function fetchProjects() {
@@ -28,6 +35,10 @@ function fetchProjects() {
           option.value = projects[i].id;
           projectsSelect.add(option, null);
         }
+        
+        chrome.storage.sync.get("project_id", function(saved) {
+          projectsSelect.value = saved.project_id;
+        });
       }
     }
   };
@@ -35,8 +46,6 @@ function fetchProjects() {
   var message = "token=" + todoistOauth.getAccessToken()
     + "&seq_no=0"
     + "&resource_types=[\"projects\"]";
-  
-  console.log(message);
   
   xhr.open('POST', 'https://todoist.com/API/v6/sync', true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
