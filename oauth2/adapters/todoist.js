@@ -19,7 +19,7 @@ OAuth2.adapter('todoist', {
    * script into
    */
   redirectURL: function(config) {
-    return 'https://todois.com/robots.txt';
+    return 'https://todoist.com/robots.txt';
   },
 
   /**
