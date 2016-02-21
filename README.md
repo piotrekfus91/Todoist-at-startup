@@ -15,9 +15,9 @@ Unfortunatelly, usually I used to forget about opening Todoist and check what I 
 But Todoist publishes REST API (authorized by OAuth2), so I decided to write simple Chrome extension which opens my dedicated Todoist project at Chrome startup.
 
 ## How does it work?
-1. When you opens extension first time, it redirects to Todoist page in order to authorize extension in Todoist.
-2. You have to authorize application (required permissions are only to read data - don't worry about writing anything to your account).
-3. After authorizing, click in extension icon one more time - you project list will be downloaded from Todoist.
+1. When you open extension for the first time, it redirects to Todoist page in order to authorize extension in Todoist.
+2. You have to authorize application (required permissions are only to read data - don't be afraid about writing anything to your account).
+3. After authorizing, click in extension icon one more time - your project list will be downloaded from Todoist.
 4. Choose what project you want to open at every Chrome startup.
 5. Don't forget to do anything :)
 
