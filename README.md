@@ -14,16 +14,18 @@ As Todoist allows creating tasks on Android (very good application), I place thi
 Unfortunatelly, usually I used to forget about opening Todoist and check what I had to do.
 But Todoist publishes REST API (authorized by OAuth2), so I decided to write simple Chrome extension which opens my dedicated Todoist project at Chrome startup.
 
+There are people, who rarely shut down theirs computers (therefore don't quit Chrome). This extension handles such a case by opening Chrome at 3.00 AM every day as well.
+
 ## How does it work?
-1. When you open extension for the first time, it redirects to Todoist page in order to authorize extension in Todoist.
-2. You have to authorize application (required permissions are only to read data - don't be afraid about writing anything to your account).
-3. After authorizing, click in extension icon one more time - your project list will be downloaded from Todoist.
-4. Choose what project you want to open at every Chrome startup.
-5. Don't forget to do anything :)
+0. When you open extension for the first time, it redirects to Todoist page in order to authorize extension in Todoist.
+0. You have to authorize application (required permissions are only to read data - don't be afraid about writing anything to your account).
+0. After authorizing, click in extension icon one more time - your project list will be downloaded from Todoist.
+0. Choose what project you want to open at every Chrome startup.
+0. Don't forget to do anything :)
 
 ## Installation
-1. Download the zip or clone the repository. If you downloaded the zip - unpack it.
-2. In Chrome menu choose "More tools" -> "Extensions".
-3. In Extensions tab check "Developer mode".
-4. Click "Load unpacked extension" and choose directory where you stored the files (this directory where manifest.json lies).
-5. Follow the "How does it work?" section steps.
+0. Download the zip or clone the repository. If you downloaded the zip - unpack it.
+0. In Chrome menu choose "More tools" -> "Extensions".
+0. In Extensions tab check "Developer mode".
+0. Click "Load unpacked extension" and choose directory where you stored the files (this directory where manifest.json lies).
+0. Follow the "How does it work?" section steps.
