@@ -1,8 +1,13 @@
 function openChosenProject() {
   chrome.storage.sync.get("project_id", function(saved) {
     if(typeof saved.project_id !== "undefined") {
-      chrome.tabs.create({
-        "url": "https://todoist.com/app#project%2F" + saved.project_id
+      var urlToOpen = "https://todoist.com/app#project%2F" + saved.project_id;
+      chrome.tabs.query({active: true}, function (tab) {
+        if(!tab[0].url.includes(saved.project_id)) {
+          chrome.tabs.create({
+            "url": "https://todoist.com/app#project%2F" + saved.project_id
+          });
+        }
       });
     }
   });
