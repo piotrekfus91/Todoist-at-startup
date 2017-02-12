@@ -1,9 +1,14 @@
 // saves action handler
 function attachListeners() {
   document.getElementById('save').addEventListener('click', function() {
-    var projectId = document.getElementById('projects').value;
+    var projectIds = document.getElementsByName('projectSelect');
+    var array = [];
+    for(var i = 0; i < projectIds.length; i++) {
+      if(projectIds[i].value !== "")
+        array.push(projectIds[i].value);
+    }
     
-    chrome.storage.sync.set({"project_id": projectId});
+    chrome.storage.sync.set({"project_ids": array});
     window.close();
   });
 }
@@ -37,7 +42,7 @@ function fetchProjects(accessToken) {
     if (xhr.readyState == 4) {
       if(xhr.status == 200) {
         var response = JSON.parse(xhr.responseText);
-        showProjects(response);
+        showAllProjects(response);
       }
     }
   };
@@ -51,25 +56,38 @@ function fetchProjects(accessToken) {
   xhr.send(message);
 }
 
+function showAllProjects(response) {
+  chrome.storage.sync.get("project_ids", function(savedProjects) {
+    for(var i = 0; i < savedProjects["project_ids"].length; i++) {
+      showProjects(response, savedProjects["project_ids"][i]);
+    }
+    showProjects(response);
+  });
+}
+
 // shows project list
-function showProjects(response) {
+function showProjects(response, projectId) {
   var projects = response.Projects;
   
-  var projectsSelect = document.getElementById('projects');
+  var projectSelect = document.createElement('select');
+  projectSelect.name = "projectSelect";
+  projectSelect.style = "width: 200px; margin: 3px";
+  var emptyOption = document.createElement('option');
+  projectSelect.add(emptyOption, null);
   for(var i = 0; i < projects.length; i++) {
     var option = document.createElement('option');
     option.text = projects[i].name;
     option.value = projects[i].id;
-    projectsSelect.add(option, null);
+    projectSelect.add(option, null);
   }
-  
-  selectPreviouslyChosenProject();
+
+
+  document.getElementById('projects').appendChild(projectSelect);
+  selectPreviouslyChosenProject(projectSelect, projectId);
 }
 
-function selectPreviouslyChosenProject() {
-  var projectsSelect = document.getElementById('projects');
-  
-  chrome.storage.sync.get("project_id", function(saved) {
-    projectsSelect.value = saved.project_id;
-  });
+function selectPreviouslyChosenProject(projectSelect, projectId) {
+  if(typeof(projectId) !== "undefined") {
+    projectSelect.value = projectId;
+  }
 }
